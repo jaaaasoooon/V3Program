@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-G:\博强\V3\GuoXuanH5Studio_V3\BoqiangH5\obj\Debug\
+D:\BQ\V3Program\GuoXuanH5Studio_V3\BoqiangH5\obj\Debug\
 BoqiangH5
 none
 false
 DEBUG;TRACE
-G:\博强\V3\GuoXuanH5Studio_V3\BoqiangH5\App.xaml
+D:\BQ\V3Program\GuoXuanH5Studio_V3\BoqiangH5\App.xaml
 272069295914
 
 59-1692975997
-201933764425
+20-437344263
 ControlResource\ComboBox.xaml;ControlWnd.xaml;Languages\StringResource.en-US.xaml;Languages\StringResource.zh-CN.xaml;LoadingWnd.xaml;MainWindow.xaml;PasswordWnd.xaml;RequestFrameTestWnd.xaml;ScanSnWnd.xaml;SelectCANWnd.xaml;Styles\DataGrid.xaml;Styles\Style.xaml;UcBattery.xaml;UcButton.xaml;UcMenu.xaml;UpdateWnd.xaml;UserCtrlAdjust.xaml;UserCtrlAFE.xaml;UserCtrlBoot.xaml;UserCtrlBqBmsInfo.xaml;UserCtrlDdBmsInfo.xaml;UserCtrlDebug.xaml;UserCtrlDidiRecord.xaml;UserCtrlEEPROM.xaml;UserCtrlMCU.xaml;UserCtrlProtectParam.xaml;UserCtrlRecord.xaml;
 
 False
