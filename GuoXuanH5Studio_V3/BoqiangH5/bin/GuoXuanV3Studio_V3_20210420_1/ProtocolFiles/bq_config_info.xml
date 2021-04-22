@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <config>
+    <device_type>9</device_type>
+    <device_index>0</device_index>
+    <device_channel>0</device_channel>
+    <baudrate>11</baudrate>
+    <protocol>0</protocol>
+    <canfd_index>0</canfd_index>
+    <arbitration_index>2</arbitration_index>
+    <databaudrate_index>0</databaudrate_index>
+    <terminalresistance>0</terminalresistance>
+    <handshakeinterval>1</handshakeinterval>
+    <datarecord_index>0</datarecord_index>
+    <wakeinterval>10</wakeinterval>
+    <isclosepwd>1</isclosepwd>
+    <isdebugmode>1</isdebugmode>
+    <voltagebase>3300</voltagebase>
+    <voltageerror>20</voltageerror>
+    <temperaturebase>29</temperaturebase>
+    <temperatureerror>6</temperatureerror>
+    <hardwareversion>HWBAT-GX-A10-V100</hardwareversion>
+    <softwareversion>FWBAT-GX-A10-V100T</softwareversion>
+  </config>
+  <update>
+    <company>boqiang</company>
+    <hardware_version>0</hardware_version>
+    <retry_num>3</retry_num>
+    <timeout_interval>2000</timeout_interval>
+    <customer_code>0</customer_code>
+    <software_version>0.0.0</software_version>
+    <skip_interval>1500</skip_interval>
+    <update_interval>1000</update_interval>
+  </update>
+</root>

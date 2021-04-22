@@ -1,0 +1,191 @@
+﻿<UserControl x:Class="BoqiangH5.UserCtrlUpdate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BoqiangH5"
+        mc:Ignorable="d" Name="ucUpdateWnd"
+        d:DesignHeight="600" d:DesignWidth="900" Loaded="ucUpdateWnd_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200*"></RowDefinition>
+            <RowDefinition Height="60*"></RowDefinition>
+            <RowDefinition Height="60*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+        </Grid.ColumnDefinitions> 
+        <GroupBox Header="通讯报文" Grid.Row="0" Grid.Column="0" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                        <ColumnDefinition Width="120"></ColumnDefinition>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="帧ID(Hex)：" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                    <TextBox Name="tbID" Grid.Column="1" Margin="2" Height="28" IsReadOnly="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></TextBox>
+                    <Label Content="数据(Hex)：" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                    <TextBox Name="tbData" Grid.Column="3" Margin="2" Height="28" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></TextBox>
+                </Grid>
+                <Grid Grid.Row="1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="60"></ColumnDefinition>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="循环间隔(ms)：" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                    <TextBox Name="tbLoopSpan" Grid.Column="1" Margin="2" Height="28" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="200"></TextBox>
+                    <CheckBox Name="chkLoop" Grid.Column="2" Content="循环发送" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                    <Button Name="btnSend" Grid.Column="3" Content="发送" Height="28" Width="70" Click="btnSend_Click"></Button>
+                    <Button Name="btnSave" Grid.Column="4" Content="保存" Height="28" Width="70" Click="btnSave_Click"></Button>
+                    <Button Name="btnClear" Grid.Column="5" Content="清除" Height="28" Width="70" Click="btnClear_Click"></Button>
+                    <CheckBox Name="chkShowData" Grid.Column="6" Content="显示数据" HorizontalAlignment="Center" VerticalAlignment="Center" Click="chkShowData_Click"></CheckBox>
+                </Grid>
+                <DataGrid Name="dgDataInfo" Grid.Row="2" CanUserAddRows="False"  CanUserSortColumns="False" AutoGenerateColumns="False"  FontSize="12"
+                          ItemsSource="{Binding Path=InformationList}" VerticalScrollBarVisibility="Auto" SelectionChanged="dgDataInfo_SelectionChanged" >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="方向" HeaderStyle="{StaticResource DataGridHeaderStyle}" Width="100"  IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate >
+                                    <Label Content="{Binding DirectionStr, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="时间" HeaderStyle="{StaticResource DataGridHeaderStyle}" Width="150"  IsReadOnly="True" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate >
+                                    <Label Content="{Binding TimeStr, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="ID" HeaderStyle="{StaticResource DataGridHeaderStyle}" Width="100"  IsReadOnly="True" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate >
+                                    <Label Content="{Binding ID, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="长度" HeaderStyle="{StaticResource DataGridHeaderStyle}" Width="60"  IsReadOnly="True" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate >
+                                    <Label Content="{Binding Length, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="内容" HeaderStyle="{StaticResource DataGridHeaderStyle}" Width="150*"  IsReadOnly="True" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate >
+                                    <Label Content="{Binding Content, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="备注" HeaderStyle="{StaticResource DataGridHeaderStyle}" Width="200*"  IsReadOnly="True" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate >
+                                    <Label Content="{Binding Comments, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--<DataGridTextColumn Header="方向" HeaderStyle="{StaticResource DataGridHeaderStyle}" Width="80" IsReadOnly="True" Binding="{Binding Path=directionStr}" ElementStyle="{StaticResource DataGridTextColumnCenterStyle}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="时间" HeaderStyle="{StaticResource DataGridHeaderStyle}" Width="180" IsReadOnly="True" Binding="{Binding Path=timeStr}" ElementStyle="{StaticResource DataGridTextColumnCenterStyle}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="ID" HeaderStyle="{StaticResource DataGridHeaderStyle}" Width="100" IsReadOnly="True" Binding="{Binding Path=id}" ElementStyle="{StaticResource DataGridTextColumnCenterStyle}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="长度" HeaderStyle="{StaticResource DataGridHeaderStyle}" Width="60" IsReadOnly="True" Binding="{Binding Path=length}" ElementStyle="{StaticResource DataGridTextColumnCenterStyle}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="内容" HeaderStyle="{StaticResource DataGridHeaderStyle}" Width="150*" IsReadOnly="True" Binding="{Binding Path=content}" ElementStyle="{StaticResource DataGridTextColumnCenterStyle}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="备注" HeaderStyle="{StaticResource DataGridHeaderStyle}" Width="200*" IsReadOnly="True" Binding="{Binding Path=comments}" ElementStyle="{StaticResource DataGridTextColumnCenterStyle}"></DataGridTextColumn>-->
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="OTA" Grid.Row="1" Grid.Column="0" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="80"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Content="文件路径：" Grid.Column="0" Grid.Row="0"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBox Name="tbFilePath" Grid.Column="1" Grid.Row="0" Margin="5 2" Height="28" IsReadOnly="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></TextBox>
+                <Button Name="btnLoad" Grid.Row="0" Grid.Column="2" Content="加载" Width="70" Height="28" Click="btnLoad_Click"></Button>
+                <Label Content="下载进度：" Grid.Column="0" Grid.Row="1 "  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <ProgressBar Name="pbDownload" Grid.Row="1" Grid.Column="1" Height="25" Value="0.00" Margin="5 2"></ProgressBar>
+                <Label Name="labDownload" Content="0.00%" Grid.Column="1" Grid.Row="1 "  HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Button Name="btnDownload" Grid.Row="1" Grid.Column="2" Content="下载" Width="70" Height="28" Click="btnDownload_Click"></Button>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="参数设置" Grid.Row="2" Grid.Column="0" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="80"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="120"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="140"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Content="公司信息：" Grid.Column="0" Grid.Row="0"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBox Name="tbCompany" Grid.Column="1" Grid.Row="0" Margin="5 2" Height="28" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></TextBox>
+                <Label Content="硬件版本：" Grid.Column="2" Grid.Row="0"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBox Name="tbHardware" Grid.Column="3" Grid.Row="0" Margin="5 2" Height="28" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></TextBox>
+                <Label Content="错误重传次数：" Grid.Column="4" Grid.Row="0"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBox Name="tbErrorNum" Grid.Column="5" Grid.Row="0" Margin="5 2" Height="28" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></TextBox>
+                <Label Content="命令超时时间(ms)：" Grid.Column="6" Grid.Row="0"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBox Name="tbTimeOut" Grid.Column="7" Grid.Row="0" Margin="5 2" Height="28" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" ></TextBox>
+
+                <Label Content="客户代码：" Grid.Column="0" Grid.Row="1"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBox Name="tbCustomerCode" Grid.Column="1" Grid.Row="1" Margin="5 2" Height="28" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></TextBox>
+                <Label Content="软件版本：" Grid.Column="2" Grid.Row="1"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <Grid Grid.Column="3" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="18"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="V" Grid.Column="0" HorizontalContentAlignment="Right" VerticalAlignment="Center"></Label>
+                    <TextBox Name="tbSoftware" Grid.Column="1" Margin="0 2 5 2" Height="28" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></TextBox>
+                </Grid>
+                <Label Content="等待跳转间隔(ms)：" Grid.Column="4" Grid.Row="1"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBox Name="tbSkipInterval" Grid.Column="5" Grid.Row="1" Margin="5 2" Height="28" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></TextBox>
+                <Label Content="等待升级结果间隔(ms)：" Grid.Column="6" Grid.Row="1"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBox Name="tbResultInterval" Grid.Column="7" Grid.Row="1" Margin="5 2" Height="28" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></TextBox>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="状态信息" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Name="btnClearInfo" Content="清除" HorizontalAlignment="Right" VerticalAlignment="Center" Width="50" Height="26"   Margin=" 0 0 5 0" Click="btnClearInfo_Click"/>
+                <RichTextBox Grid.Row="1" Name="rtbInfo" Margin="5" IsReadOnly="True" VerticalScrollBarVisibility="Auto">
+                    <RichTextBox.Resources>
+                        <Style TargetType="{x:Type Paragraph}">
+                            <Setter Property="Margin" Value="0"/>
+                        </Style>
+                    </RichTextBox.Resources>
+                </RichTextBox>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>
