@@ -91,6 +91,7 @@ namespace BoqiangH5
             ucDdRecordWnd.RequireReadDeviceInfoEvent += OnRequireReadBqDeviceInfoEvent;
 
             ucBqBmsInfoWnd.RefreshUTCEvent += OnRefreshUTCEvent;
+            ucDdBmsInfoWnd.PassUTCEvent += OnRefreshUTCEvent;
             ucBqBmsInfoWnd.IsCompanyMatchEvent += OnIsCompanyMatchEvent;
 
             ucUpdateWnd.SendCommunicationMsgEvent += OnSendCommunicationMsgEvent;
@@ -602,6 +603,8 @@ namespace BoqiangH5
                     gridMenuAFE.Background = defBrush;
                     gridMenuDdBMS.Background = defBrush;
                     gridMenuUpdate.Background = defBrush;
+
+                    labUTC.Visibility = Visibility.Visible;
                     break;
 
                 case "gridMenuParam":
@@ -630,6 +633,8 @@ namespace BoqiangH5
                     gridMenuEeprom.Background = defBrush;
                     gridMenuAFE.Background = defBrush;
                     gridMenuDdBMS.Background = defBrush;
+
+                    labUTC.Visibility = Visibility.Visible;
                     break;
 
                 case "gridMenuEeprom":
@@ -661,6 +666,8 @@ namespace BoqiangH5
                     ucEepromWnd.isSetPassword = true;
                     OnRaiseEepromWndUpdateEvent(null);
                     ucProtectParamWnd.StartOrStopTimer(true);
+
+                    labUTC.Visibility = Visibility.Visible;
                     break;
 
                 case "gridMenuMcu":
@@ -690,6 +697,8 @@ namespace BoqiangH5
                     gridMenuAFE.Background = defBrush;
                     gridMenuDdBMS.Background = defBrush;
                     ucMcuWnd.isSetPassword = true;
+
+                    labUTC.Visibility = Visibility.Visible;
                     OnRaiseMcuWndUpdateEvent(null);
                     break;
 
@@ -720,6 +729,8 @@ namespace BoqiangH5
                     gridMenuParam.Background = defBrush;
                     gridMenuAFE.Background = defBrush;
                     gridMenuDdBMS.Background = defBrush;
+
+                    labUTC.Visibility = Visibility.Collapsed;
                     break;
 
                 case "gridMenuAdjust":
@@ -748,6 +759,8 @@ namespace BoqiangH5
                     gridMenuParam.Background = defBrush;
                     gridMenuAFE.Background = defBrush;
                     gridMenuDdBMS.Background = defBrush;
+
+                    labUTC.Visibility = Visibility.Visible;
                     OnRaiseAdjustWndUpdateEvent(null);
                     break;
 
@@ -777,6 +790,8 @@ namespace BoqiangH5
                     gridMenuParam.Background = defBrush;
                     gridMenuAFE.Background = defBrush;
                     gridMenuDdBMS.Background = defBrush;
+
+                    labUTC.Visibility = Visibility.Visible;
                     OnRaiseDebugWndUpdateEvent(null);
                     break;
 
@@ -806,6 +821,8 @@ namespace BoqiangH5
                     gridMenuParam.Background = defBrush;
                     gridMenuDebug.Background = defBrush;
                     gridMenuDdBMS.Background = defBrush;
+
+                    labUTC.Visibility = Visibility.Visible;
                     break;
                 case "gridMenuBoot":
                     SelectCANWnd.m_H5Protocol = H5Protocol.BO_QIANG;
@@ -833,6 +850,8 @@ namespace BoqiangH5
                     gridMenuDebug.Background = defBrush;
                     gridMenuAFE.Background = defBrush;
                     gridMenuDdBMS.Background = defBrush;
+
+                    labUTC.Visibility = Visibility.Visible;
                     OnRaiseBootTestWndUpdateEvent(null);
                     break;
                 case "gridMenuDdBMS":
@@ -861,6 +880,8 @@ namespace BoqiangH5
                     gridMenuDebug.Background = defBrush;
                     gridMenuAFE.Background = defBrush;
                     gridMenuBoot.Background = defBrush;
+
+                    labUTC.Visibility = Visibility.Visible;
                     break;
                 case "gridMenuUpdate":
                     SelectCANWnd.m_H5Protocol = H5Protocol.BO_QIANG;
@@ -888,6 +909,8 @@ namespace BoqiangH5
                     gridMenuAFE.Background = defBrush;
                     gridMenuDdBMS.Background = defBrush;
                     gridMenuBoot.Background = defBrush;
+
+                    labUTC.Visibility = Visibility.Collapsed;
                     break;
                 default:
                     break;
