@@ -84,6 +84,49 @@ namespace BoqiangH5.BQProtocol
         }
         bool isReturn = false;
         #endregion
+
+        #region 超时定时器 
+        public System.Timers.Timer timeOutTimer;
+        public void SetTimeOutTimer()
+        {
+            timeOutTimer = new System.Timers.Timer(100);
+            timeOutTimer.Elapsed += OnTimeOutTimerEvent;
+            timeOutTimer.AutoReset = true;
+        }
+        int timeOutNum = 0;
+        private void OnTimeOutTimerEvent(Object source, ElapsedEventArgs e)
+        {
+            if(m_bIsStopCommunication)
+            {
+                timeOutNum++;
+                BoqiangH5Repository.CSVFileHelper.WriteLogs("log", "error", string.Format("超时计数 {0}",timeOutNum), true);
+                if (timeOutNum == 5)
+                {
+                    System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        System.Windows.MessageBox.Show("操作超时！","提示",System.Windows.MessageBoxButton.OK,System.Windows.MessageBoxImage.Information);
+                    }));
+                    timeOutNum = 0;
+                    m_bIsStopCommunication = false;
+                }
+            }
+            else
+            {
+                timeOutNum = 0;
+            }
+        }
+
+        public void StopTimeOutTimer()
+        {
+            timeOutNum = 0;
+            m_bIsStopCommunication = false;
+            if (timeOutTimer != null)
+            {
+                timeOutTimer.Stop();
+                timeOutTimer.Close();
+            }
+        }
+        #endregion
         private void OnRaiseMenuBreakEvent(Object source, EventArgs e)
         {
             EventHandler handler = RaiseMenuBreakEvent;

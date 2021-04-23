@@ -434,6 +434,7 @@ namespace BoqiangH5
 
             isCompanyMatch = false;
             //BqProtocol.BqInstance.SetTimer();
+            BqProtocol.BqInstance.SetTimeOutTimer();
             ThreadPool.QueueUserWorkItem(BqProtocol.BqInstance.ThreadReadMasterTeleData);
             ThreadPool.QueueUserWorkItem(DdProtocol.DdInstance.ThreadReadMasterTeleData);
             ucEepromWnd.isSetPassword = false;
@@ -471,6 +472,7 @@ namespace BoqiangH5
                 statusBrush.Color = m_black;
                 breakBrush.Color = m_white;
                 connectBrush.Color = m_green;
+                BqProtocol.BqInstance.StopTimeOutTimer();
             }
             else
             {
