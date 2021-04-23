@@ -116,7 +116,6 @@ namespace BoqiangH5
                     btnSavePara.IsEnabled = true;
                     btnReadPara.IsEnabled = true;
                 }
-                RequestReadMCUParamEvent?.Invoke(this, EventArgs.Empty);
             }
             else
             {
@@ -127,6 +126,11 @@ namespace BoqiangH5
             }
         }
         
+        public void ReadMcuParam()//读MCU数据，获取 电流检测电阻值
+        {
+            if (MainWindow.m_statusBarInfo.IsOnline)
+                RequestReadMCUParamEvent?.Invoke(this, EventArgs.Empty);
+        }
         private void btnLoadPara_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();

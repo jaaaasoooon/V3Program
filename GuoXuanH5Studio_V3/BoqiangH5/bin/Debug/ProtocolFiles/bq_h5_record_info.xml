@@ -97,7 +97,7 @@
         <type>operation</type>
       </record_type_node>
       <record_type_node>
-        <description>时间校准(DD)</description>
+        <description>时间校准(CLIENT)</description>
         <value>11</value>
         <type>operation</type>
       </record_type_node>

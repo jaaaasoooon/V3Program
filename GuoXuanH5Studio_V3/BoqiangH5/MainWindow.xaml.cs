@@ -433,7 +433,7 @@ namespace BoqiangH5
             }
 
             isCompanyMatch = false;
-            BqProtocol.BqInstance.SetTimer();
+            //BqProtocol.BqInstance.SetTimer();
             ThreadPool.QueueUserWorkItem(BqProtocol.BqInstance.ThreadReadMasterTeleData);
             ThreadPool.QueueUserWorkItem(DdProtocol.DdInstance.ThreadReadMasterTeleData);
             ucEepromWnd.isSetPassword = false;
@@ -667,6 +667,7 @@ namespace BoqiangH5
                     OnRaiseEepromWndUpdateEvent(null);
                     ucProtectParamWnd.StartOrStopTimer(true);
 
+                    ucEepromWnd.ReadMcuParam();
                     labUTC.Visibility = Visibility.Visible;
                     break;
 

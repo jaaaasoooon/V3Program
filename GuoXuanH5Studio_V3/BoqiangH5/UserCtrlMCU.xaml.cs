@@ -104,11 +104,10 @@ namespace BoqiangH5
         private void btnReadMcuData_Click(object sender, RoutedEventArgs e)
         {
             BqProtocol.bReadBqBmsResp = true;
-            isReadMCU = false;
+            isReadMCU = true;
             BqProtocol.BqInstance.m_bIsStopCommunication = true;
             System.Threading.Thread.Sleep(500);
             BqProtocol.BqInstance.ReadMcuData();
-            isReadMCU = true;
             btnLoadMcuPara.IsEnabled = true;
             btnWriteMcuData.IsEnabled = true;
         }
@@ -253,10 +252,11 @@ namespace BoqiangH5
         }
 
         public void HandleRecvMcuDataEvent(object sender, CustomRecvDataEventArgs e)
-        {   if(isReadMCU)
+        {
+            if (isReadMCU)
             {
-                BqUpdateMcuInfo(e.RecvMsg);
                 BqProtocol.BqInstance.m_bIsStopCommunication = false;
+                BqUpdateMcuInfo(e.RecvMsg);
                 isReadMCU = false;
             }
         }

@@ -132,11 +132,11 @@ namespace BoqiangH5.BQProtocol
                     {
                         nHandshakeFailure++;
                         byte[] rdBmsBuf = new byte[] { 0x3A, 0x03,0xCC,0xA2,0x00,0x06,0x90, 0x85 };
-                        isReturn = false;
-                        timer.Start();
+                        //isReturn = false;
+                        //timer.Start();
                         SendSingleFrameData(rdBmsBuf);
-                        timer.Stop();
-                        isReturn = true;
+                        //timer.Stop();
+                        //isReturn = true;
                         Thread.Sleep(m_bUpateBmsInterval);//lipeng  2020.03.27修改BMS信息刷新时间
                     }
                 }
