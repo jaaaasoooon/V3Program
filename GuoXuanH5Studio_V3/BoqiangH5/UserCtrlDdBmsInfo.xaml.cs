@@ -193,13 +193,14 @@ namespace BoqiangH5
         private void OnTimer(object sender, EventArgs e)
         {
             string str = System.DateTime.Now.ToString("yyyy年MM月dd日 HH时mm分ss秒");
-            string strLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35},{36},{37},{38},{39},{40},{41},{42},{43},{44},{45},{46},{47},{48},{49},{50},{51},{52},{53},{54},{55}",
+            string strLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35},{36},{37},{38},{39},{40},{41},{42},{43},{44},{45},{46},{47},{48},{49},{50},{51},{52},{53},{54},{55},{56},{57},{58},{59}",
                     System.DateTime.Now.ToString("yyyy年MM月dd日 HH时mm分ss秒"), ListBmsInfo[0].StrValue, ListBmsInfo[1].StrValue, ListBmsInfo[2].StrValue, ListBmsInfo[3].StrValue, ListBmsInfo[4].StrValue,
                     ListBmsInfo[5].StrValue, ListBmsInfo[6].StrValue, ListBmsInfo[7].StrValue, ListBmsInfo[8].StrValue, ListBmsInfo[9].StrValue, ListBmsInfo[10].StrValue, ListBmsInfo[11].StrValue,
                     ListBmsInfo[12].StrValue, ListBmsInfo[13].StrValue, ListBmsInfo[14].StrValue, ListBmsInfo[15].StrValue, ListBmsInfo[16].StrValue, ListBmsInfo[17].StrValue, ListBmsInfo[18].StrValue,
                     ListBmsInfo[19].StrValue, ListBmsInfo[20].StrValue, ListBmsInfo[21].StrValue, ListBmsInfo[22].StrValue, ListBmsInfo[23].StrValue, ListBmsInfo[24].StrValue,
                     ListBmsInfo[25].StrValue, ListBmsInfo[26].StrValue, ListBmsInfo[27].StrValue, ListBmsInfo[28].StrValue, ListBmsInfo[29].StrValue, ListBmsInfo[30].StrValue, ListBmsInfo[31].StrValue
-                    , ListBmsInfo[32].StrValue, ListBmsInfo[33].StrValue, ListBmsInfo[34].StrValue, ListBmsInfo[35].StrValue, ListBmsInfo[36].StrValue, ListBmsInfo[37].StrValue, ListBmsInfo[38].StrValue, ListCellVoltage[0].StrValue, ListCellVoltage[1].StrValue, ListCellVoltage[2].StrValue,
+                    , ListBmsInfo[32].StrValue, ListBmsInfo[33].StrValue, ListBmsInfo[34].StrValue, ListBmsInfo[35].StrValue, ListBmsInfo[36].StrValue, ListBmsInfo[37].StrValue, ListBmsInfo[38].StrValue, ListBmsInfo[39].StrValue,
+                    ListBmsInfo[40].StrValue, ListBmsInfo[41].StrValue, ListBmsInfo[42].StrValue, ListCellVoltage[0].StrValue, ListCellVoltage[1].StrValue, ListCellVoltage[2].StrValue,
                     ListCellVoltage[3].StrValue, ListCellVoltage[4].StrValue, ListCellVoltage[5].StrValue, ListCellVoltage[6].StrValue, ListCellVoltage[7].StrValue, ListCellVoltage[8].StrValue, ListCellVoltage[9].StrValue,
                     ListCellVoltage[10].StrValue, ListCellVoltage[11].StrValue, ListCellVoltage[12].StrValue, ListCellVoltage[13].StrValue, ListCellVoltage[14].StrValue, ListCellVoltage[15].StrValue);
             if (!string.IsNullOrEmpty(strLine))

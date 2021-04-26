@@ -148,7 +148,7 @@ namespace BoqiangH5.DDProtocol
 
         public void ReadDdBmsInfo()
         {
-            byte[] rdBuf = new byte[] { 0x3A, 0x03, 0x03, 0xA2, 0x00, 0x69, 0x65, 0x85 };
+            byte[] rdBuf = new byte[] { 0x3A, 0x03, 0x03, 0xA2, 0x00, 0x6D, 0x65, 0x85 };
 
             byte[] crc16 = CRC_Check.CRC16(rdBuf, 0, rdBuf.Length - 2);
 

@@ -349,7 +349,7 @@ namespace BoqiangH5
                                     OnRaiseReadDdRecordCountEvent(recvEvent);
                                 }
                             }
-                            else if (canEvent.listData[1] == 0xD2)
+                            else if (canEvent.listData[1] == 0xDA)
                             {
                                 if (DdProtocol.DdInstance.m_bIsStopCommunication)
                                 {
