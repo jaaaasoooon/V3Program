@@ -197,16 +197,17 @@ namespace BoqiangH5
                 var utc = m_ListBmsInfo.SingleOrDefault(p => p.Description == "UTC");
                 if (utc != null)
                 {
-                    uint dt = 0;
-                    bool ret = UInt32.TryParse(utc.StrValue, out dt);
-                    if (dt < 4294967295)
-                    {
-                        if (ret)
-                        {
-                            TimeSpan ts = new TimeSpan((long)(dt * Math.Pow(10, 7)));
-                            RefreshUTCEvent?.Invoke(this, new EventArgs<string>((new DateTime(1970, 1, 1, 8, 0, 0) + ts).ToString("yyyy/MM/dd HH:mm:ss")));
-                        }
-                    }
+                    //uint dt = 0;
+                    //bool ret = UInt32.TryParse(utc.StrValue, out dt);
+                    //if (dt < 4294967295)
+                    //{
+                    //    if (ret)
+                    //    {
+                    //        TimeSpan ts = new TimeSpan((long)(dt * Math.Pow(10, 7)));
+                    //        RefreshUTCEvent?.Invoke(this, new EventArgs<string>((new DateTime(1970, 1, 1, 8, 0, 0) + ts).ToString("yyyy/MM/dd HH:mm:ss")));
+                    //    }
+                    //}
+                    RefreshUTCEvent?.Invoke(this, new EventArgs<string>(utc.StrValue));
                 }
 
                 if (maxVoltageCellNum > 0)

@@ -191,7 +191,16 @@ namespace BoqiangH5
 
         public void OnRefreshUTCEvent(object sender,EventArgs<string> e)
         {
-            labUTC.Content = e.Args;
+            uint dt = 0;
+            bool ret = UInt32.TryParse(e.Args, out dt);
+            if (dt < 4294967295)
+            {
+                if (ret)
+                {
+                    TimeSpan ts = new TimeSpan((long)(dt * Math.Pow(10, 7)));
+                    labUTC.Content = (new DateTime(1970, 1, 1, 8, 0, 0) + ts).ToString("yyyy/MM/dd HH:mm:ss");
+                }
+            }
         }
         public void OnRequireReadDeviceInfoEvent(object sender,EventArgs e)
         {

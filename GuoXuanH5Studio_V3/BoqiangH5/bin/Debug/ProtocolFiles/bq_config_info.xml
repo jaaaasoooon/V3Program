@@ -5,7 +5,7 @@
     <device_index>0</device_index>
     <device_channel>0</device_channel>
     <baudrate>11</baudrate>
-    <protocol>0</protocol>
+    <protocol>1</protocol>
     <canfd_index>0</canfd_index>
     <arbitration_index>2</arbitration_index>
     <databaudrate_index>0</databaudrate_index>

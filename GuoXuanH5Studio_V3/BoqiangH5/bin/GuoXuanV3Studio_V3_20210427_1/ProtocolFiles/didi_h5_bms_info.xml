@@ -510,6 +510,50 @@
       <register_num>1</register_num>
       <conversion>/</conversion>
     </register_node_info>
+      <register_node_info>
+      <address>A269</address>
+      <description>跌落事件</description>
+      <value>0</value>
+      <min_value>0</min_value>
+      <max_value>0</max_value>
+      <unit>/</unit>
+      <scale>/</scale>
+      <register_num>1</register_num>
+      <conversion>/</conversion>
+    </register_node_info>
+      <register_node_info>
+      <address>A269</address>
+      <description>跌落高度</description>
+      <value>0</value>
+      <min_value>0</min_value>
+      <max_value>0</max_value>
+      <unit>cm</unit>
+      <scale>/</scale>
+      <register_num>1</register_num>
+      <conversion>/</conversion>
+    </register_node_info>
+	<register_node_info>
+      <address>A26A</address>
+      <description>跌落事件时间戳</description>
+      <value>0</value>
+      <min_value>0</min_value>
+      <max_value>0</max_value>
+      <unit>/</unit>
+      <scale>/</scale>
+      <register_num>2</register_num>
+      <conversion>/</conversion>
+    </register_node_info>
+  	<register_node_info>
+      <address>A26C</address>
+      <description>全生命周期跌落次数累计</description>
+      <value>0</value>
+      <min_value>0</min_value>
+      <max_value>0</max_value>
+      <unit>次</unit>
+      <scale>/</scale>
+      <register_num>1</register_num>
+      <conversion>/</conversion>
+    </register_node_info>
   </bms_info>
 
   <battery_status_info>

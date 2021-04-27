@@ -196,6 +196,13 @@ namespace BoqiangH5
                         {
                             m_ListBmsInfo[i].StrValue = (nBmsVal * decimal.Parse(m_ListBmsInfo[i].Scale)).ToString();
                         }
+                        else if(m_ListBmsInfo[i].Description.Contains("-X") || m_ListBmsInfo[i].Description.Contains("-Y") || m_ListBmsInfo[i].Description.Contains("-Z"))
+                        {
+                            byte[] bytes = new byte[m_ListCellVoltage[i].ByteCount];
+                            Buffer.BlockCopy(rdBuf.ToArray(), nBqByteIndex, bytes, 0, bytes.Length);
+                            Int16 val = BitConverter.ToInt16(bytes,0);
+                            m_ListBmsInfo[i].StrValue = (val / 1000.0).ToString();
+                        }
                         else
                             m_ListBmsInfo[i].StrValue = (nBmsVal * decimal.Parse(m_ListBmsInfo[i].Scale)).ToString();
                     }
