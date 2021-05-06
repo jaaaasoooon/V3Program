@@ -193,8 +193,17 @@ namespace BoqiangH5
                         if(m_ListAdjustParam[i].ByteCount == "2")
                         {
                             byte[] bytes = new byte[2];
-                            bytes[0] = data[offset + 1];
-                            bytes[1] = data[offset];
+                            if(BitConverter.IsLittleEndian)
+                            {
+                                bytes[0] = data[offset];
+                                bytes[1] = data[offset + 1];
+                            }
+                            else
+                            {
+                                bytes[0] = data[offset + 1];
+                                bytes[1] = data[offset];
+                            }
+
                             if(m_ListAdjustParam[i].Name.Contains("电压"))
                             {
                                 UInt16 nVal = BitConverter.ToUInt16(bytes, 0);

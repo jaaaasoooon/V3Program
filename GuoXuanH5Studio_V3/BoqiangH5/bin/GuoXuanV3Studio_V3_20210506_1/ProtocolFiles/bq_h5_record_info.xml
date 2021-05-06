@@ -202,10 +202,20 @@
         <description>内包进水唤醒</description>
         <value>4C</value>
         <type>status</type>
-      </record_type_node>     
-      
-      
-      <record_type_node>
+      </record_type_node>
+	  <record_type_node>
+		<description>震动</description>
+		<value>4D</value>
+		<type>status</type>
+	  </record_type_node>
+	  <record_type_node>
+		<description>震动唤醒</description>
+		<value>4E</value>
+		<type>status</type>
+	  </record_type_node>
+
+
+		<record_type_node>
         <description>看门狗复位</description>
         <value>50</value>
         <type>status</type>
