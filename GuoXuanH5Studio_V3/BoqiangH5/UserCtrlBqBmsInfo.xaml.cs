@@ -43,10 +43,6 @@ namespace BoqiangH5
         static List<BitStatInfo> m_ListErrorSysStatus = new List<BitStatInfo>();
         static List<BitStatInfo> m_ListErrorProtectStatus = new List<BitStatInfo>();
 
-        //MCU消息
-        List<H5BmsInfo> ListSysInfo1 = new List<H5BmsInfo>();
-        List<H5BmsInfo> ListSysInfo2 = new List<H5BmsInfo>();
-        List<H5BmsInfo> ListChargeInfo = new List<H5BmsInfo>();
         List<string> SnList;
         //string SnRecordPath = AppDomain.CurrentDomain.BaseDirectory + @"BoqiangV3\Barcode.csv"; //程序合并时使用
         string SnRecordPath = AppDomain.CurrentDomain.BaseDirectory + @"Barcode.csv";
@@ -81,11 +77,6 @@ namespace BoqiangH5
             XmlHelper.LoadBqBmsStatusConfig(strConfigFile, "communication_status_info/byte_status_info/bit_status_info", m_ListCommunicationStatus);
             XmlHelper.LoadBqBmsStatusConfig(strConfigFile, "mode_status_info/byte_status_info/bit_status_info", m_ListModeStatus);
             XmlHelper.LoadBqBmsStatusConfig(strConfigFile, "logic_status_info/byte_status_info/bit_status_info", m_ListLogicStatus);
-
-            //读MCU参数
-            XmlHelper.LoadXmlConfig(strConfigFile, "mcu_info/system1/mcu_node_info", ListSysInfo1);
-            XmlHelper.LoadXmlConfig(strConfigFile, "mcu_info/system2/mcu_node_info", ListSysInfo2);
-            XmlHelper.LoadXmlConfig(strConfigFile, "mcu_info/charge_discharge/mcu_node_info", ListChargeInfo);
 
             //读条码参数
             SnList = CSVFileHelper.ReadSN(SnRecordPath);
