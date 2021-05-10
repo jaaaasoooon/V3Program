@@ -4528,11 +4528,25 @@
 
   <adjust_param>
     <adjust_node_param>
-      <description>电流零点</description>
+      <description>电流零点低温</description>
       <value>0</value>
-      <unit>mA</unit>
+      <unit>℃</unit>
       <byte_count>2</byte_count>
     </adjust_node_param>
+	  
+	<adjust_node_param>
+      <description>电流零点常温</description>
+      <value>0</value>
+      <unit>℃</unit>
+      <byte_count>2</byte_count>
+    </adjust_node_param>
+
+	<adjust_node_param>
+		<description>电流零点高温</description>
+		<value>0</value>
+		<unit>℃</unit>
+	    <byte_count>2</byte_count>
+	</adjust_node_param>
 
     <adjust_node_param>
       <description>电流_500mA</description>
