@@ -368,7 +368,7 @@ namespace BoqiangH5
         private void btnAdjustLoadVol_Click(object sender, RoutedEventArgs e)
         {
             uint voltage = 0;
-            if(uint.TryParse(tbLoadVoltage.Text.Trim(),out voltage))
+            if(uint.TryParse(tbAdjustLoadVoltage.Text.Trim(),out voltage))
             {
                 BqProtocol.BqInstance.m_bIsStopCommunication = true;
                 Thread.Sleep(200);
@@ -398,7 +398,7 @@ namespace BoqiangH5
         private void btnAdjustBatteryVol_Click(object sender, RoutedEventArgs e)
         {
             uint voltage = 0;
-            if (uint.TryParse(tbBatteryVoltage.Text.Trim(), out voltage))
+            if (uint.TryParse(tbAdjustBatteryVoltage.Text.Trim(), out voltage))
             {
                 BqProtocol.BqInstance.m_bIsStopCommunication = true;
                 Thread.Sleep(200);
