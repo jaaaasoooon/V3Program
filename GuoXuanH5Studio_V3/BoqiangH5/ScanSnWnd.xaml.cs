@@ -26,7 +26,6 @@ namespace BoqiangH5
 
         private void tbSn_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var it = 0;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

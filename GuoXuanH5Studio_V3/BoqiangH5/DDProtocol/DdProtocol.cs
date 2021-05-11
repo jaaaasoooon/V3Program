@@ -19,7 +19,6 @@ namespace BoqiangH5.DDProtocol
 
         public int nReadSOHFailure = 0;
 
-        int nReadBmsTimes = 0;
 
         //public bool m_bIsUpdateDdBmsInfo = true;
         public bool m_bIsSaveBmsInfo = true;

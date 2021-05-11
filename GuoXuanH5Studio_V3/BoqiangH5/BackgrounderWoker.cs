@@ -13,8 +13,6 @@ namespace BoqiangH5
     {                      
 
         ApplicationLayerProtocol AppLayProtocol = new ApplicationLayerProtocol();         
-
-        private bool teleMeterFresh = false;       
              
 
         public void treatRecvFrame(AppLayerEvent appLayEvent)

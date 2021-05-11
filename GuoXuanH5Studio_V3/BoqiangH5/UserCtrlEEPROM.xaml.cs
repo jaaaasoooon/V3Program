@@ -58,7 +58,6 @@ namespace BoqiangH5
                 //记录每次读取的一行记录
                 string strLine = "";
 
-                int nIndex = 0;
                 //逐行读取数据
                 while ((strLine = sr.ReadLine()) != null)
                 {
@@ -154,7 +153,6 @@ namespace BoqiangH5
                 //记录每次读取的一行记录
                 string strLine = "";
 
-                int nIndex = 0;
                 //逐行读取数据
                 while ((strLine = sr.ReadLine()) != null)
                 {

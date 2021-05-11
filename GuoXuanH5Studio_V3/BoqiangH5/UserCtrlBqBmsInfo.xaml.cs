@@ -1505,12 +1505,10 @@ namespace BoqiangH5
             }
         }
 
-        bool isReadFlash = false;
         private void btnReadFlash_Click(object sender, RoutedEventArgs e)
         {
             if (MainWindow.m_statusBarInfo.IsOnline)
             {
-                isReadFlash = true;
                 BqProtocol.BqInstance.m_bIsStopCommunication = true;
                 Thread.Sleep(200);
                 BqProtocol.BqInstance.BQ_ReadFlash();

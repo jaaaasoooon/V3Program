@@ -23,7 +23,6 @@ namespace BoqiangH5
         //static int wakeInterval = 5;
         static int recordInterval = 1;
         static bool isClosePwd = false;
-        static bool isDebugMode = false;
         static int voltageBase = 0;
         static int voltageError = 0;
         static int temperatureBase = 0;
