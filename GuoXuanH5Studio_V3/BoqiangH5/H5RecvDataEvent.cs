@@ -296,7 +296,7 @@ namespace BoqiangH5
                             {
                                 OnRequireRaiseReadDeviceInfoEvent(recvEvent);
                             }
-                            else if (canEvent.listData[1] == 0xD2)
+                            else if (canEvent.listData[1] == 0xDA)
                             {
                                 OnRaiseReadDdBmsInfoEvent(recvEvent);
                             }
