@@ -202,3 +202,12 @@ G:\博强\V3\GuoXuanH5Studio_V3\BoqiangH5Repository\obj\Debug\BoqiangH5Repositor
 G:\博强\V3\GuoXuanH5Studio_V3\BoqiangH5Repository\obj\Debug\BoqiangH5Repository.csproj.CopyComplete
 G:\博强\V3\GuoXuanH5Studio_V3\BoqiangH5Repository\obj\Debug\BoqiangH5Repository.dll
 G:\博强\V3\GuoXuanH5Studio_V3\BoqiangH5Repository\obj\Debug\BoqiangH5Repository.pdb
+D:\BQ\V3Program\GuoXuanH5Studio_V3\BoqiangH5Repository\bin\Debug\BoqiangH5Repository.dll
+D:\BQ\V3Program\GuoXuanH5Studio_V3\BoqiangH5Repository\bin\Debug\BoqiangH5Repository.pdb
+D:\BQ\V3Program\GuoXuanH5Studio_V3\BoqiangH5Repository\bin\Debug\BoqiangH5Entity.dll
+D:\BQ\V3Program\GuoXuanH5Studio_V3\BoqiangH5Repository\bin\Debug\BoqiangH5Entity.pdb
+D:\BQ\V3Program\GuoXuanH5Studio_V3\BoqiangH5Repository\obj\Debug\BoqiangH5Repository.csprojAssemblyReference.cache
+D:\BQ\V3Program\GuoXuanH5Studio_V3\BoqiangH5Repository\obj\Debug\BoqiangH5Repository.csproj.CoreCompileInputs.cache
+D:\BQ\V3Program\GuoXuanH5Studio_V3\BoqiangH5Repository\obj\Debug\BoqiangH5Repository.csproj.CopyComplete
+D:\BQ\V3Program\GuoXuanH5Studio_V3\BoqiangH5Repository\obj\Debug\BoqiangH5Repository.dll
+D:\BQ\V3Program\GuoXuanH5Studio_V3\BoqiangH5Repository\obj\Debug\BoqiangH5Repository.pdb

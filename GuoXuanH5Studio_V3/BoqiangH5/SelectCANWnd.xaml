@@ -176,11 +176,14 @@
                     <RowDefinition Height="30*"></RowDefinition>
                     <!--<RowDefinition Height="30*"></RowDefinition>-->
                 </Grid.RowDefinitions>
-                <Label Content="{DynamicResource scProtocol}"  Grid.Column="0" Grid.Row="0" Style="{StaticResource LabelStyle}"/>
-                <ComboBox Name="cbProtocol" Grid.Column="1" Grid.Row="0" Style="{StaticResource ComboxStyle}" HorizontalAlignment="Left"  Margin="10,0" Width="100">
+                <Label Content="{DynamicResource scProtocol}"  Grid.Column="0" Grid.Row="0" Style="{StaticResource LabelStyle}" Visibility="Hidden"/>
+                <ComboBox Name="cbProtocol" Grid.Column="1" Grid.Row="0" Style="{StaticResource ComboxStyle}" HorizontalAlignment="Left"  Margin="10,0" Width="100" Visibility="Hidden">
                     <ComboBoxItem Content="博强" />
                     <ComboBoxItem Content="滴滴" />
                 </ComboBox>
+
+                <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}" Content="CAN通讯源地址：0x"></Label>
+                <TextBox Name="tbSourceAddr" Grid.Row="0"  Grid.Column="1" Margin="10 0 10 0" Style="{StaticResource TextBoxStyle}" />
 
                 <Label Content="{DynamicResource scRecordInterval}"  Grid.Column="2" Grid.Row="0" Style="{StaticResource LabelStyle}"/>
                 <ComboBox Name="cbRecordInterval" Grid.Column="3" Grid.Row="0" Style="{StaticResource ComboxStyle}" HorizontalAlignment="Left"  Margin="10,0" Width="100">

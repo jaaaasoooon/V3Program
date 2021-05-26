@@ -51,17 +51,18 @@ namespace BoqiangH5
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            #region 更换CAN通讯源地址测试
+            #region 更换CAN通讯源地址,先变更CAN通讯协议ID
             /*uint id = 0x1CEB0300;
             byte[] bytes = new byte[4] { 0x00, 0x03, 0xEB, 0x1C };
-            uint _id = BitConverter.ToUInt32(bytes,0);
+            uint _id = BitConverter.ToUInt32(bytes,0);*/
 
-            byte _byte = 0x2A;
+            byte _byte = SelectCANWnd.m_SourceAddr;
             int val = (_byte << 2) + 0x03;
             byte value = byte.Parse(val.ToString());
             byte[] _bytes = new byte[4] { 0x00, 0x03, value, 0x1C };
             uint ID = BitConverter.ToUInt32(_bytes, 0);
-            int _val = 0x1CAB0300;*/
+            BqProtocol.BqInstance.SetProtocolID(ID,_byte);
+            DdProtocol.DdInstance.SetProtocolID(ID,_byte);
             #endregion
 
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;

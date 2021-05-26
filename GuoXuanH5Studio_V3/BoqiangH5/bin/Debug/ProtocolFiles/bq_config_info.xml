@@ -21,6 +21,7 @@
     <temperatureerror>6</temperatureerror>
     <hardwareversion>HWBAT-GX-A10-V100</hardwareversion>
     <softwareversion>FWBAT-GX-A10-V100T</softwareversion>
+    <sourceaddress>3A</sourceaddress>
   </config>
   <update>
     <company>boqiang</company>

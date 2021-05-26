@@ -15,7 +15,7 @@ namespace BoqiangH5.BQProtocol
 
         public System.Timers.Timer timer;
 
-        static readonly uint BqProtocolID = 0x1CEB0300;
+        public static  uint BqProtocolID = 0x1CEB0300;
 
         public static bool bReadBqBmsResp = true;
 
@@ -33,12 +33,17 @@ namespace BoqiangH5.BQProtocol
         public bool m_bIsSendMultiFrame = false;
         public bool m_bIsStop = false;
         public bool m_bIsTest = false;
+        byte m_bSourceAddress = 0x3A;
 
 
         private BqProtocol()
         {
         }
-
+        public void SetProtocolID(uint id,byte _byte)
+        {
+            BqProtocolID = id;
+            m_bSourceAddress = _byte;
+        }
         public static BqProtocol BqInstance
         {
             get
@@ -174,7 +179,7 @@ namespace BoqiangH5.BQProtocol
                     else
                     {
                         nHandshakeFailure++;
-                        byte[] rdBmsBuf = new byte[] { 0x3A, 0x03,0xCC,0xA2,0x00,0x06,0x90, 0x85 };
+                        byte[] rdBmsBuf = new byte[] { m_bSourceAddress, 0x03,0xCC,0xA2,0x00,0x06,0x90, 0x85 };
                         //isReturn = false;
                         //timer.Start();
                         SendSingleFrameData(rdBmsBuf);
@@ -190,7 +195,7 @@ namespace BoqiangH5.BQProtocol
         {
             while (MainWindow.m_statusBarInfo.IsOnline)
             {
-                byte[] rdMcuBuf = new byte[] { 0x3A, 0x03, 0xCC, 0xA8, 0x00, 0x06, 0x00, 0x00 };
+                byte[] rdMcuBuf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xA8, 0x00, 0x06, 0x00, 0x00 };
 
                 if (bReadBqBmsResp)
                 {
@@ -208,7 +213,7 @@ namespace BoqiangH5.BQProtocol
         {
             while (MainWindow.m_statusBarInfo.IsOnline)
             {    
-                byte[] rdEepromBuf = new byte[] { 0x3A, 0x03, 0xCC, 0xB1, 0x00, 0x06, 0x00, 0x00 };
+                byte[] rdEepromBuf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xB1, 0x00, 0x06, 0x00, 0x00 };
 
                 if (bReadBqBmsResp)
                 {
@@ -230,11 +235,11 @@ namespace BoqiangH5.BQProtocol
             {
                 byte[] rdRecordmBuf;
                 if(readtype == 0)
-                    rdRecordmBuf = new byte[] { 0x3A, 0x03, 0xA6, 0x00, 0x00, 0x00 };
+                    rdRecordmBuf = new byte[] { m_bSourceAddress, 0x03, 0xA6, 0x00, 0x00, 0x00 };
                 else if(readtype == 1)
-                    rdRecordmBuf = new byte[] { 0x3A, 0x03, 0xA6, 0x01, 0x00, 0x00 };
+                    rdRecordmBuf = new byte[] { m_bSourceAddress, 0x03, 0xA6, 0x01, 0x00, 0x00 };
                 else
-                    rdRecordmBuf = new byte[] { 0x3A, 0x03, 0xA6, 0x02, 0x00, 0x00 };
+                    rdRecordmBuf = new byte[] { m_bSourceAddress, 0x03, 0xA6, 0x02, 0x00, 0x00 };
 
                 if (bReadBqBmsResp)
                 {
@@ -254,7 +259,7 @@ namespace BoqiangH5.BQProtocol
         {
             while (MainWindow.m_statusBarInfo.IsOnline)
             {
-                byte[] rdRecordmBuf = new byte[] { 0x3A, 0x03, 0xD6,  0x00, 0x00 };
+                byte[] rdRecordmBuf = new byte[] { m_bSourceAddress, 0x03, 0xD6,  0x00, 0x00 };
 
                 if (bReadBqBmsResp)
                 {
@@ -296,7 +301,7 @@ namespace BoqiangH5.BQProtocol
 
         public void BQ_ReadDeviceInfo()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xCC, 0xA0, 0x00,0x06,0x00,0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xA0, 0x00,0x06,0x00,0x00 };
 
             SendSingleFrameData(buf);
         }
@@ -312,21 +317,21 @@ namespace BoqiangH5.BQProtocol
 
         public void BQ_JumpToBoot()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xD0, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xD0, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
 
         public void BQ_Reset()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD,0xBC,0x00,0x08,0x00,0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD,0xBC,0x00,0x08,0x00,0x00, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
 
         public void BQ_AlterSOC(byte[] byteSOC)
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD, 0xB9, 0x00, 0x08,0x00,0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD, 0xB9, 0x00, 0x08,0x00,0x00, 0x00, 0x00 };
             buf[6] = byteSOC[0];
             buf[7] = byteSOC[1];
 
@@ -335,41 +340,41 @@ namespace BoqiangH5.BQProtocol
 
         public void BQ_FactoryReset()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD,0xBE,0x00,0x08,0x00,0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD,0xBE,0x00,0x08,0x00,0x00, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
 
         public void BQ_Shutdown()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD, 0xBA, 0x00, 0x08,0x00,0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD, 0xBA, 0x00, 0x08,0x00,0x00, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
 
         public void BQ_Sleep()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD, 0xBB, 0x00, 0x08,0x00,0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD, 0xBB, 0x00, 0x08,0x00,0x00, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
 
         public void BQ_OverDischarge()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD, 0xBF, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD, 0xBF, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
         public void BQ_ReadBootInfo()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xCC, 0xB9, 0x00, 0x06, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xB9, 0x00, 0x06, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
 
         public void BQ_ReadUID()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xCC, 0xA1, 0x00 ,0x06,0x00,0x00};
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xA1, 0x00 ,0x06,0x00,0x00};
 
             SendSingleFrameData(buf);
         }
@@ -386,7 +391,7 @@ namespace BoqiangH5.BQProtocol
 
         public void BQ_ReadRTC()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03,0xCC,0xA3, 0x00, 0x06, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03,0xCC,0xA3, 0x00, 0x06, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
@@ -394,7 +399,7 @@ namespace BoqiangH5.BQProtocol
         public void SendMultiFrame(byte[] dataBuf, int len, byte nCmd)
         {
             byte[] cmdBuf = new byte[len + 8];
-            cmdBuf[0] = 0x3A;
+            cmdBuf[0] = m_bSourceAddress;
             cmdBuf[1] = 0x03;
             cmdBuf[2] = 0xDD;
             cmdBuf[3] = nCmd;
@@ -445,7 +450,7 @@ namespace BoqiangH5.BQProtocol
         {
             byte[] arrRtCur = BitConverter.GetBytes(nRTCurrent);
 
-            //byte[] adCmdBuf = new byte[] { 0x3A, 0x03,0xDD,0xA9, 0x00,0x08, 0x00, 0x00, 0x00, 0x00 };
+            //byte[] adCmdBuf = new byte[] { m_bSourceAddress, 0x03,0xDD,0xA9, 0x00,0x08, 0x00, 0x00, 0x00, 0x00 };
 
             //adCmdBuf[6] = arrRtCur[1];
             //adCmdBuf[7] = arrRtCur[0];
@@ -468,7 +473,7 @@ namespace BoqiangH5.BQProtocol
         {
             byte[] arrRtCur = BitConverter.GetBytes(nCurrent);
 
-            //byte[] adCmdBuf = new byte[] { 0x3A, 0x03, 0xDD, 0xA8, 0x00, 0x08, 0x00, 0x00,0x00,0x00, 0x00, 0x00 };
+            //byte[] adCmdBuf = new byte[] { m_bSourceAddress, 0x03, 0xDD, 0xA8, 0x00, 0x08, 0x00, 0x00,0x00,0x00, 0x00, 0x00 };
 
             //adCmdBuf[10] = arrRtCur[1];
             //adCmdBuf[11] = arrRtCur[0];
@@ -479,21 +484,21 @@ namespace BoqiangH5.BQProtocol
 
         public void BQ_EnterTestMode()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03,0xDD,0xB8,0x00, 0x08,0x01, 0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03,0xDD,0xB8,0x00, 0x08,0x01, 0x00, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
 
         public void BQ_ExitTestMode()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD, 0xB8, 0x00, 0x08,0x00, 0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD, 0xB8, 0x00, 0x08,0x00, 0x00, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
 
         public void BQ_ReadVoltageProtectParam()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xCC, 0xA9, 0x00, 0x06,0x00,0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xA9, 0x00, 0x06,0x00,0x00 };
 
             SendSingleFrameData(buf);
         }
@@ -505,7 +510,7 @@ namespace BoqiangH5.BQProtocol
 
         public void BQ_ReadCurrentProtectParam()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xCC, 0xAA, 0x00, 0x06, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xAA, 0x00, 0x06, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
@@ -517,7 +522,7 @@ namespace BoqiangH5.BQProtocol
 
         public void BQ_ReadTemperatureProtectParam()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xCC, 0xAB, 0x00, 0x06,0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xAB, 0x00, 0x06,0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
@@ -529,7 +534,7 @@ namespace BoqiangH5.BQProtocol
 
         public void BQ_ReadWarningProtectParam()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xCC, 0xAC, 0x00, 0x06, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xAC, 0x00, 0x06, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
@@ -539,7 +544,7 @@ namespace BoqiangH5.BQProtocol
         }
         public void BQ_ReadHumidityProtectParam()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xCC, 0xAD, 0x00, 0x06, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xAD, 0x00, 0x06, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
@@ -551,28 +556,28 @@ namespace BoqiangH5.BQProtocol
 
         public void BQ_RequireReadEepromRegister()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xCC, 0xB0, 0x00, 0x06, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xB0, 0x00, 0x06, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
 
         public void BQ_RequireReadOthersRegister()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xCC, 0xB2, 0x00, 0x06, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xB2, 0x00, 0x06, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
 
         public void BQ_ReadOthersRegister()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xCC, 0xB3, 0x00, 0x06, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xB3, 0x00, 0x06, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
 
         public void BQ_ReadAdjustParam()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xCC, 0xAE, 0x00, 0x06, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xAE, 0x00, 0x06, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
@@ -594,7 +599,7 @@ namespace BoqiangH5.BQProtocol
         public void BQ_AdjustInnerResistanceParam(ushort resistance)
         {
             byte[] array = BitConverter.GetBytes(resistance);
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD, 0xAC, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD, 0xAC, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
             buf[6] = array[0];
             buf[7] = array[1];
             SendSingleFrameData(buf);
@@ -603,7 +608,7 @@ namespace BoqiangH5.BQProtocol
         public void BQ_AdjustOutResistanceParam(ushort resistance)
         {
             byte[] array = BitConverter.GetBytes(resistance);
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD, 0xAD, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD, 0xAD, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
             buf[6] = array[0];
             buf[7] = array[1];
             SendSingleFrameData(buf);
@@ -611,51 +616,51 @@ namespace BoqiangH5.BQProtocol
 
         public void BQ_ExitChargeMos()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD, 0xC0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD, 0xC0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
             SendSingleFrameData(buf);
         }
         public void BQ_CloseChargeMos()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD, 0xC0, 0x00, 0x08, 0x01, 0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD, 0xC0, 0x00, 0x08, 0x01, 0x00, 0x00, 0x00 };
             SendSingleFrameData(buf);
         }
         public void BQ_OpenChargeMos()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD, 0xC0, 0x00, 0x08, 0x02, 0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD, 0xC0, 0x00, 0x08, 0x02, 0x00, 0x00, 0x00 };
             SendSingleFrameData(buf);
         }
         public void BQ_ExitDischargeMos()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD, 0xC1, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD, 0xC1, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
             SendSingleFrameData(buf);
         }
         public void BQ_CloseDischargeMos()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD, 0xC1, 0x00, 0x08, 0x01, 0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD, 0xC1, 0x00, 0x08, 0x01, 0x00, 0x00, 0x00 };
             SendSingleFrameData(buf);
         }
         public void BQ_OpenDischargeMos()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD, 0xC1, 0x00, 0x08, 0x02, 0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD, 0xC1, 0x00, 0x08, 0x02, 0x00, 0x00, 0x00 };
             SendSingleFrameData(buf);
         }
 
         public void BQ_ReadFlash()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xCC, 0xBA, 0x00, 0x06, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xBA, 0x00, 0x06, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
 
         public void BQ_EnterProductionMode(byte val)
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD, 0xC3, 0x00, 0x08, val, 0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD, 0xC3, 0x00, 0x08, val, 0x00, 0x00, 0x00 };
             SendSingleFrameData(buf);
         }
 
         public void BQ_ExitProductionMode()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0xDD, 0xC3, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0xDD, 0xC3, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
 
             SendSingleFrameData(buf);
         }
@@ -663,7 +668,7 @@ namespace BoqiangH5.BQProtocol
         #region
         public UpdateInformation BQ_RequestUpdateApp()
         {
-            byte[] buf = new byte[] { 0x3A, 0x03, 0x45, 0x01, 0x00, 0x00,0x00,0x00 };
+            byte[] buf = new byte[] { m_bSourceAddress, 0x03, 0x45, 0x01, 0x00, 0x00,0x00,0x00 };
             SendSingleFrameData(buf);
 
             UpdateInformation info = new UpdateInformation();
@@ -691,7 +696,7 @@ namespace BoqiangH5.BQProtocol
         public void SendUpdateAppMultiFrame(byte[] dataBuf, int len, byte nCmd, List<UpdateInformation> queue,bool isAddQueue,object lockobj)
         {
             byte[] cmdBuf = new byte[len + 8];
-            cmdBuf[0] = 0x3A;
+            cmdBuf[0] = m_bSourceAddress;
             cmdBuf[1] = 0x03;
             cmdBuf[2] = 0x45;
             cmdBuf[3] = nCmd;

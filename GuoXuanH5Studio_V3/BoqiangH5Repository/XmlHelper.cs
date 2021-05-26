@@ -32,6 +32,7 @@ namespace BoqiangH5Repository
         public static string m_strTemperatureError = null;
         public static string m_strHardwareVersion = null;
         public static string m_strSoftwareVersion = null;
+        public static string m_strSourceAddr = null;
 
         #region 配置文件路径
         //程序合并时使用
@@ -91,6 +92,7 @@ namespace BoqiangH5Repository
                 m_strTemperatureError = nodeList[17].InnerText;
                 m_strHardwareVersion = nodeList[18].InnerText;
                 m_strSoftwareVersion = nodeList[19].InnerText;
+                m_strSourceAddr = nodeList[20].InnerText;
             }
             catch (Exception ex)
             {
@@ -136,6 +138,7 @@ namespace BoqiangH5Repository
                 nodeList[17].InnerText = m_strTemperatureError;
                 nodeList[18].InnerText = m_strHardwareVersion;
                 nodeList[19].InnerText = m_strSoftwareVersion;
+                nodeList[20].InnerText = m_strSourceAddr;
                 xmlDoc.Save(strLoadCfgFile);
 
             }

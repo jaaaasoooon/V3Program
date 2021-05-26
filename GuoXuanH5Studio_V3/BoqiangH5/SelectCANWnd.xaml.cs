@@ -27,6 +27,7 @@ namespace BoqiangH5
         static int voltageError = 0;
         static int temperatureBase = 0;
         static int temperatureError = 0;
+        static byte sourceAddr = 0x3A;
         public static H5Protocol m_H5Protocol
         {
             get
@@ -185,6 +186,18 @@ namespace BoqiangH5
                     temperatureError = val;
                 }
                 return temperatureError;
+            }
+        }
+        public static byte m_SourceAddr
+        {
+            get
+            {
+                byte val;
+                if(StringToByte(XmlHelper.m_strSourceAddr, out val))
+                {
+                    sourceAddr = val;
+                }
+                return sourceAddr;
             }
         }
         public SelectCANWnd()        
@@ -359,6 +372,7 @@ namespace BoqiangH5
             }
             tbHardwareVersion.Text = XmlHelper.m_strHardwareVersion;
             tbSoftwareVersion.Text = XmlHelper.m_strSoftwareVersion;
+            tbSourceAddr.Text = XmlHelper.m_strSourceAddr;
         }
 
         public virtual void OnRaiseCloseEvent(EventArgs e)
@@ -466,6 +480,17 @@ namespace BoqiangH5
                 }
                 XmlHelper.m_strHardwareVersion = tbHardwareVersion.Text;
                 XmlHelper.m_strSoftwareVersion = tbSoftwareVersion.Text;
+
+                byte _byte = 0x00;
+                if (StringToByte(tbSourceAddr.Text.Trim(),out _byte))
+                {
+                    XmlHelper.m_strSourceAddr = tbSourceAddr.Text.Trim();
+                }
+                else
+                {
+                    MessageBox.Show("输入的CAN通讯源地址有误，请重新输入！", "输入提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
                 XmlHelper.SaveConfigInfo();
                 this.Close();
 
@@ -474,6 +499,25 @@ namespace BoqiangH5
             }
         }
 
+        static bool StringToByte(string str, out byte _byte)
+        {
+            try
+            {
+                if (str.Length != 2)
+                {
+                    _byte = 0x00;
+                    return false;
+                }
+
+                _byte = byte.Parse(str, System.Globalization.NumberStyles.HexNumber);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                _byte = 0x00;
+                return false;
+            }
+        }
         private void Canel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

@@ -13,7 +13,7 @@ namespace BoqiangH5.DDProtocol
 
         public System.Timers.Timer timerBmsStatus;
 
-        static readonly uint DidiProtocolID = 0x1CEB0300;  // 0x14050320
+        static  uint DidiProtocolID = 0x1CEB0300;  // 0x14050320
         
         public static bool bReadDdBmsResp = true;
 
@@ -27,11 +27,17 @@ namespace BoqiangH5.DDProtocol
         public bool m_bIsStopCommunication = false;//增加此参数，当点击读寄存器时，将该值置为ture,停掉UTC读取、握手和数据刷新，用于判断读寄存器的返回消息是否成功
         public bool m_bIsStop = false;
         public bool m_bIsFlag = false;
+        byte m_bSourceAddress = 0x3A;
 
         private DdProtocol()
         {
         }
 
+        public void SetProtocolID(uint id,byte _byte)
+        {
+            DidiProtocolID = id;
+            m_bSourceAddress = _byte;
+        }
         public static DdProtocol DdInstance
         {
             get
@@ -97,7 +103,7 @@ namespace BoqiangH5.DDProtocol
 
         private void CheckConnectReadSOH()
         {
-            byte[] rdBuf = new byte[] { 0x3A, 0x03, 0x03, 0xA2, 0x00, 0x01, 0x00, 0x00 };
+            byte[] rdBuf = new byte[] { m_bSourceAddress, 0x03, 0x03, 0xA2, 0x00, 0x01, 0x00, 0x00 };
 
             byte[] crc16 = CRC_Check.CRC16(rdBuf, 0, rdBuf.Length - 2);
 
@@ -147,7 +153,7 @@ namespace BoqiangH5.DDProtocol
 
         public void ReadDdBmsInfo()
         {
-            byte[] rdBuf = new byte[] { 0x3A, 0x03, 0x03, 0xA2, 0x00, 0x6D, 0x65, 0x85 };
+            byte[] rdBuf = new byte[] { m_bSourceAddress, 0x03, 0x03, 0xA2, 0x00, 0x6D, 0x65, 0x85 };
 
             byte[] crc16 = CRC_Check.CRC16(rdBuf, 0, rdBuf.Length - 2);
 
@@ -165,7 +171,7 @@ namespace BoqiangH5.DDProtocol
             {
                 return;
             }
-            byte[] rdBuf = new byte[] { 0x3A, 0x03, 0x03, 0xA2, 0x48,0x02,0x00,0x00 };
+            byte[] rdBuf = new byte[] { m_bSourceAddress, 0x03, 0x03, 0xA2, 0x48,0x02,0x00,0x00 };
             byte[] crc16 = CRC_Check.CRC16(rdBuf, 0, rdBuf.Length - 2);
 
             rdBuf[rdBuf.Length - 2] = crc16[1];
@@ -182,7 +188,7 @@ namespace BoqiangH5.DDProtocol
         {
             TimeSpan ts = dt - systemStartTime;
             byte[] data = BitConverter.GetBytes(((uint)(ts.Ticks / Math.Pow(10,7))));
-            byte[] rdBuf = new byte[] { 0x3A, 0x03, 0x10, 0xA2, 0x48, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+            byte[] rdBuf = new byte[] { m_bSourceAddress, 0x03, 0x10, 0xA2, 0x48, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
             rdBuf[rdBuf.Length - 3] = data[0];
             rdBuf[rdBuf.Length - 4] = data[1];
             rdBuf[rdBuf.Length - 5] = data[2];
@@ -202,7 +208,7 @@ namespace BoqiangH5.DDProtocol
         public void AdjustDidiRTC(uint dt)
         {
             byte[] data = BitConverter.GetBytes(dt);
-            byte[] rdBuf = new byte[] { 0x3A, 0x03, 0x10, 0xA2, 0x48, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+            byte[] rdBuf = new byte[] { m_bSourceAddress, 0x03, 0x10, 0xA2, 0x48, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
             rdBuf[rdBuf.Length - 3] = data[0];
             rdBuf[rdBuf.Length - 4] = data[1];
             rdBuf[rdBuf.Length - 5] = data[2];
@@ -220,7 +226,7 @@ namespace BoqiangH5.DDProtocol
         }
         public void ReadDeviceInfo()
         {
-            byte[] rdBuf = new byte[] { 0x3A, 0x03, 0x03, 0xA0, 0x00, 0x2B, 0x65, 0x85 };
+            byte[] rdBuf = new byte[] { m_bSourceAddress, 0x03, 0x03, 0xA0, 0x00, 0x2B, 0x65, 0x85 };
 
             byte[] crc16 = CRC_Check.CRC16(rdBuf, 0, rdBuf.Length - 2);
 
@@ -235,7 +241,7 @@ namespace BoqiangH5.DDProtocol
 
         public void DD_PowerOn()
         {
-            byte[] poBuf = new byte[] { 0x3A, 0x03, 0x10, 0xA2, 0x00, 0x01, 0x00, 0x01, 0x9B, 0x29 };
+            byte[] poBuf = new byte[] { m_bSourceAddress, 0x03, 0x10, 0xA2, 0x00, 0x01, 0x00, 0x01, 0x9B, 0x29 };
 
             byte[] crc16 = CRC_Check.CRC16(poBuf, 0, poBuf.Length - 2);
 
@@ -250,7 +256,7 @@ namespace BoqiangH5.DDProtocol
 
         public void DD_PowerOff()
         {
-            byte[] poBuf = new byte[] { 0x3A, 0x03, 0x10, 0xA2, 0x00, 0x01, 0x00, 0x00, 0x5A, 0xE9 };
+            byte[] poBuf = new byte[] { m_bSourceAddress, 0x03, 0x10, 0xA2, 0x00, 0x01, 0x00, 0x00, 0x5A, 0xE9 };
 
             byte[] crc16 = CRC_Check.CRC16(poBuf, 0, poBuf.Length - 2);
 
@@ -267,7 +273,7 @@ namespace BoqiangH5.DDProtocol
         public void DD_WriteRegister(byte[] addr, byte num, byte[] data)
         {
             byte[] poBuf = new byte[addr.Length + data.Length + 1 + 3 + 2];
-            poBuf[0] = 0x3A;
+            poBuf[0] = m_bSourceAddress;
             poBuf[1] = 0x03;
             poBuf[2] = 0x10;
             int offset = 3;
@@ -296,7 +302,7 @@ namespace BoqiangH5.DDProtocol
 
         public void DD_ReadRegister(byte[] addr,byte num)
         {
-            byte[] rdBuf = new byte[] { 0x3A, 0x03, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00 };
+            byte[] rdBuf = new byte[] { m_bSourceAddress, 0x03, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00 };
             Buffer.BlockCopy(addr, 0, rdBuf, 3, addr.Length);
             rdBuf[addr.Length + 3] = num;
             byte[] crc16 = CRC_Check.CRC16(rdBuf, 0, rdBuf.Length - 2);
@@ -349,7 +355,7 @@ namespace BoqiangH5.DDProtocol
 
         public void ReadDidiRecordCount()
         {
-            byte[] rdBuf = new byte[] { 0x3A, 0x03, 0x03, 0xA3, 0x00, 0x01, 0x00, 0x00 };
+            byte[] rdBuf = new byte[] { m_bSourceAddress, 0x03, 0x03, 0xA3, 0x00, 0x01, 0x00, 0x00 };
             byte[] crc16 = CRC_Check.CRC16(rdBuf, 0, rdBuf.Length - 2);
 
             rdBuf[rdBuf.Length - 2] = crc16[1];
@@ -362,7 +368,7 @@ namespace BoqiangH5.DDProtocol
         }
         public void ReadDidiRecord()
         {
-            byte[] rdBuf = new byte[] { 0x3A, 0x03, 0x03, 0xA3, 0x01, 0x24, 0x00, 0x00 };
+            byte[] rdBuf = new byte[] { m_bSourceAddress, 0x03, 0x03, 0xA3, 0x01, 0x24, 0x00, 0x00 };
             byte[] crc16 = CRC_Check.CRC16(rdBuf, 0, rdBuf.Length - 2);
 
             rdBuf[rdBuf.Length - 2] = crc16[1];
@@ -376,7 +382,7 @@ namespace BoqiangH5.DDProtocol
 
         public void ReadDidiFirstRecordData()
         {
-            byte[] rdBuf = new byte[] { 0x3A, 0x03, 0xCC,0xA4, 0x00, 0x08, 0x00,0x00,0x00, 0x00 };
+            byte[] rdBuf = new byte[] { m_bSourceAddress, 0x03, 0xCC,0xA4, 0x00, 0x08, 0x00,0x00,0x00, 0x00 };
             byte[] crc16 = CRC_Check.CRC16(rdBuf, 0, rdBuf.Length - 2);
 
             rdBuf[rdBuf.Length - 2] = crc16[1];
@@ -389,7 +395,7 @@ namespace BoqiangH5.DDProtocol
         }
         public void ReadDidiNextRecordData()
         {
-            byte[] rdBuf = new byte[] { 0x3A, 0x03, 0xCC, 0xA4,0x00,0x08,0x00,0x01, 0x00, 0x00 };
+            byte[] rdBuf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xA4,0x00,0x08,0x00,0x01, 0x00, 0x00 };
             byte[] crc16 = CRC_Check.CRC16(rdBuf, 0, rdBuf.Length - 2);
 
             rdBuf[rdBuf.Length - 2] = crc16[1];
@@ -402,7 +408,7 @@ namespace BoqiangH5.DDProtocol
         }
         public void ReadDidiCurrentRecordData()
         {
-            byte[] rdBuf = new byte[] { 0x3A, 0x03, 0xCC, 0xA4, 0x00, 0x08, 0x00, 0x02, 0x00, 0x00 };
+            byte[] rdBuf = new byte[] { m_bSourceAddress, 0x03, 0xCC, 0xA4, 0x00, 0x08, 0x00, 0x02, 0x00, 0x00 };
             byte[] crc16 = CRC_Check.CRC16(rdBuf, 0, rdBuf.Length - 2);
 
             rdBuf[rdBuf.Length - 2] = crc16[1];
@@ -415,7 +421,7 @@ namespace BoqiangH5.DDProtocol
         }
         public void EraseDidiRecord()
         {
-            byte[] rdBuf = new byte[] { 0x3A, 0x03, 0xDD,0xBD,0x00,0x06, 0x00, 0x00 };
+            byte[] rdBuf = new byte[] { m_bSourceAddress, 0x03, 0xDD,0xBD,0x00,0x06, 0x00, 0x00 };
             byte[] crc16 = CRC_Check.CRC16(rdBuf, 0, rdBuf.Length - 2);
 
             rdBuf[rdBuf.Length - 2] = crc16[1];
@@ -429,7 +435,7 @@ namespace BoqiangH5.DDProtocol
 
         public void DD_SettingBatteryStatus(byte status)
         {
-            byte[] Buf = new byte[] { 0x3A, 0x03, 0x10, 0xA2, 0x64, 0x01, 0x00, status, 0x00, 0x00 };
+            byte[] Buf = new byte[] { m_bSourceAddress, 0x03, 0x10, 0xA2, 0x64, 0x01, 0x00, status, 0x00, 0x00 };
 
             byte[] crc16 = CRC_Check.CRC16(Buf, 0, Buf.Length - 2);
 
@@ -444,7 +450,7 @@ namespace BoqiangH5.DDProtocol
 
         public void DD_ReadFeedbackInfo()
         {
-            byte[] rdBuf = new byte[] { 0x3A, 0x03, 0x03, 0xA2, 0xA0, 0x03, 0x00, 0x00 };
+            byte[] rdBuf = new byte[] { m_bSourceAddress, 0x03, 0x03, 0xA2, 0xA0, 0x03, 0x00, 0x00 };
 
             byte[] crc16 = CRC_Check.CRC16(rdBuf, 0, rdBuf.Length - 2);
 
@@ -459,7 +465,7 @@ namespace BoqiangH5.DDProtocol
 
         public void DD_SettingBrakeStatus(byte status)
         {
-            byte[] Buf = new byte[] { 0x3A, 0x03, 0x10, 0xA2, 0x68, 0x01, status, 0x00, 0x00, 0x00 };
+            byte[] Buf = new byte[] { m_bSourceAddress, 0x03, 0x10, 0xA2, 0x68, 0x01, status, 0x00, 0x00, 0x00 };
 
             byte[] crc16 = CRC_Check.CRC16(Buf, 0, Buf.Length - 2);
 
@@ -474,7 +480,7 @@ namespace BoqiangH5.DDProtocol
 
         public void DD_ReleyEvent()
         {
-            byte[] Buf = new byte[] { 0x3A, 0x03, 0x46, 0x02, 0x00, 0x00, 0x00, 0x00 };
+            byte[] Buf = new byte[] { m_bSourceAddress, 0x03, 0x46, 0x02, 0x00, 0x00, 0x00, 0x00 };
 
             byte[] crc16 = CRC_Check.CRC16(Buf, 0, Buf.Length - 2);
 
