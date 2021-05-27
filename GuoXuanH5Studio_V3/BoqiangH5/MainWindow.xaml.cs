@@ -63,6 +63,7 @@ namespace BoqiangH5
             uint ID = BitConverter.ToUInt32(_bytes, 0);
             BqProtocol.BqInstance.SetProtocolID(ID,_byte);
             DdProtocol.DdInstance.SetProtocolID(ID,_byte);
+            ucUpdateWnd.SetCanID(ID);
             #endregion
 
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;

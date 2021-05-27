@@ -61,12 +61,17 @@ namespace BoqiangH5
         int retryNum = 1;
         int skipInterval = 0;
         UpdateViewModel model;
+        uint canID = 0x1CEB0300;
+        public void SetCanID(uint id)
+        {
+            canID = id;
+        }
         private void ucUpdateWnd_Loaded(object sender, RoutedEventArgs e)
         {
             //dgDataInfo.ItemsSource = InfoList;
             model = new UpdateViewModel();
             this.DataContext = model;
-            tbID.Text = "0x1CEB0300";
+            tbID.Text = "0x" + canID.ToString("X");
             timer.Tick += new EventHandler(OnTimer);
             timeOutTimer.Elapsed +=OnTimeOutTimer;
 

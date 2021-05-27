@@ -436,7 +436,7 @@ namespace BoqiangH5.BQProtocol
                     Buffer.BlockCopy(cmdBuf, nSendIndex, byteCmdBuf, 0, 8);
                 }
 
-                uint BqProtID = (uint)(0x1CEB0300 | (n - 1));
+                uint BqProtID = (uint)(BqProtocolID | (n - 1));
                 DataLinkLayer.SendCanFrame(BqProtID, byteCmdBuf);
               
                 nSendIndex += 8;
@@ -733,7 +733,7 @@ namespace BoqiangH5.BQProtocol
                     Buffer.BlockCopy(cmdBuf, nSendIndex, byteCmdBuf, 0, 8);
                 }
 
-                uint BqProtID = (uint)(0x1CEB0300 | (n - 1));
+                uint BqProtID = (uint)(BqProtocolID | (n - 1));
                 DataLinkLayer.SendCanFrame(BqProtID, byteCmdBuf);
 
                 nSendIndex += 8;
@@ -796,7 +796,7 @@ namespace BoqiangH5.BQProtocol
                     Buffer.BlockCopy(bytes, nSendIndex, byteCmdBuf, 0, 8);
                 }
 
-                uint BqProtID = (uint)(0x1CEB0300 | (n - 1));
+                uint BqProtID = (uint)(BqProtocolID | (n - 1));
                 DataLinkLayer.SendCanFrame(BqProtID, byteCmdBuf);
 
                 nSendIndex += 8;

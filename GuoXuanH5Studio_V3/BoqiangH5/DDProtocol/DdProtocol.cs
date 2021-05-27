@@ -344,7 +344,7 @@ namespace BoqiangH5.DDProtocol
                     Buffer.BlockCopy(dataBuf, nSendIndex, byteCmdBuf, 0, 8);
                 }
 
-                uint ProtID = (uint)(0x1CEB0300 | (n - 1));
+                uint ProtID = (uint)(DidiProtocolID | (n - 1));
                 DataLinkLayer.SendCanFrame(ProtID, byteCmdBuf);
 
                 nSendIndex += 8;
